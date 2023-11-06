@@ -25,18 +25,20 @@
       <div name="result" id="result"></div>
     </form>
 
-    <py-script>
-      from pyscript import when, Element
-      @when("click", selector="#submit")
-      def check_guess():
-        user_guess = int(Element("guess").value)
-        result = Element("result")
-        if user_guess == selection:
-          result.write("Congratulations! You guessed correctly.")
-        elif user_guess > selection:
-          result.write("Try again! Your guess was too high.")
-        else:
-          result.write("Try again! Your guess was too low.")
-    </py-script>
+    <script type="module">
+  import { when, Element } from 'https://pyscript.net/latest/pyscript.js';
+
+  when("click", "#submit", () => {
+    const userGuess = parseInt(Element("guess").value);
+    const result = Element("result");
+    if (userGuess === selection) {
+      result.write("Congratulations! You guessed correctly.");
+    } else if (userGuess > selection) {
+      result.write("Try again! Your guess was too high.");
+    } else {
+      result.write("Try again! Your guess was too low.");
+    }
+  });
+</script>
   </body>
 </html>
